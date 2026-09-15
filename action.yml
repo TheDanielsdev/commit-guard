@@ -1,0 +1,42 @@
+name: 'Commit Guard'
+description: 'Scans commits/PRs for leaked secrets, vulnerable dependencies, and unsafe code patterns, with suggested fixes.'
+author: 'your-name-here'
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  github-token:
+    description: 'Token used to post PR comments and annotations. Defaults to GITHUB_TOKEN.'
+    required: false
+    default: ${{ '{{' }} github.token ${{ '}}' }}
+  fail-on:
+    description: 'Minimum severity that fails the check: high | medium | low | none'
+    required: false
+    default: 'high'
+  enable-secrets-scan:
+    description: 'Run the secrets scanner (gitleaks)'
+    required: false
+    default: 'true'
+  enable-deps-scan:
+    description: 'Run the dependency vulnerability scanner (osv-scanner)'
+    required: false
+    default: 'true'
+  enable-pattern-scan:
+    description: 'Run the unsafe-code-pattern scanner (semgrep)'
+    required: false
+    default: 'true'
+  comment-on-pr:
+    description: 'Post findings as a PR comment'
+    required: false
+    default: 'true'
+
+outputs:
+  findings-count:
+    description: 'Total number of findings across all scanners'
+  high-severity-count:
+    description: 'Number of high-severity findings'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

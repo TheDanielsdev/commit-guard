@@ -1,0 +1,25 @@
+{
+  "name": "commit-guard",
+  "version": "0.1.0",
+  "description": "GitHub Action that scans commits/PRs for leaked secrets, vulnerable dependencies, and unsafe code patterns — with suggested fixes.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.19.43",
+    "@vercel/ncc": "^0.38.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT"
+}
